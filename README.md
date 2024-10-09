@@ -1,4 +1,4 @@
-# dhbwmawwi20<xx> SE<x>
+# dhbwmawwi2024 SEA
 DHBW Mannheim, Wirtschaftsinformatik, <Kurs>
 
 ## Skript
