@@ -29,7 +29,7 @@ public class DatatypeExamples {
     final double PI = 3.14;
 
     // nicht möglich --> weil Konstant
-    //PI = 5;
+    // PI = 5;
 
     final double E;
     E = 2.6;
