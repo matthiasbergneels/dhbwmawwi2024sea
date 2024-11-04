@@ -80,7 +80,7 @@ public class LiteralExamples {
     String htmlPage = """
       <html>
         <head>
-          <title>Meine tolle HTML Seite in Java</title>
+          <title>Meine "tolle" HTML Seite in Java</title>
         </head>
         <body>
           <h1>Meine tolle HTML Seite in Java</h1>

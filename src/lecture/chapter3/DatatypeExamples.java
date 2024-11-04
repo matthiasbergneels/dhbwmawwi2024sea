@@ -35,5 +35,28 @@ public class DatatypeExamples {
     E = 2.6;
 
     char myCharacter = 'a';
+
+
+    // Konvertierung
+    numberA = 2_123_456_789;
+
+    System.out.println("Konvertierung von int zu float:");
+    float numberG = numberA;
+
+    System.out.println(numberA);
+    System.out.println(numberG);
+
+    System.out.println("Konvertierung von float zu int:");
+    numberA = (int)numberG;
+
+    System.out.println(numberA);
+    System.out.println(numberG);
+
+    System.out.println("Konvertierung von int zu double:");
+    numberA = 2_123_456_789;
+    numberF = numberA;
+
+    System.out.println(numberA);
+    System.out.println(numberF);
   }
 }
