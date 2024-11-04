@@ -71,8 +71,18 @@ public class OperatorExamples {
     numberA *= numberB;   // ==> numberA = numberA * numberB;
     System.out.println(numberA);
 
+    // Logische Operatoren
 
     boolean isRaining = false;
+    boolean isLeavingHouse = true;
+
+    boolean needUmbrella = isLeavingHouse && isRaining;
+
+    double runningDistanceInKm = 9.9;
+    double runningTimeInH = 0.87;
+
+    boolean keepRunning = !((runningDistanceInKm >= 10) | (runningTimeInH >= 1));
+
 
     System.out.println("Brauche ich einen Regenschirm? " + (isRaining ? "Ja" : "Nein"));
 
