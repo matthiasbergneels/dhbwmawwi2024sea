@@ -1,6 +1,10 @@
-package lecture.chapter5;
+package lecture.chapter5.subpackage;
 
-public class CarRun {
+import lecture.chapter5.Car;
+import lecture.chapter5.Color;
+
+// Sichtbarkeit über Paketgrenzen
+public class CarRunDifferentPackage {
 
   public static void main(String[] args) {
 
@@ -34,8 +38,8 @@ public class CarRun {
     yourCar.wheelColor.colorHexCode = 0xFF0000;
      */
 
-    myCar.printCarDetails();
-    yourCar.printCarDetails();
+    // myCar.printCarDetails(); // --> printCarDetails() nicht verfügbar, da protected
+    // yourCar.printCarDetails(); // --> printCarDetails() nicht verfügbar, da protected
 
     System.out.println("Mein Auto fährt " + myCar.getSpeed() + " km/h");
     System.out.println("Dein Auto fährt " + yourCar.getSpeed() + " km/h");
@@ -58,7 +62,7 @@ public class CarRun {
      */
     myCar.setColor("kack braun");
 
-    myCar.printCarDetails();
+    // myCar.printCarDetails(); // --> printCarDetails() nicht verfügbar, da protected
 
   }
 }
