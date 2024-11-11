@@ -37,11 +37,11 @@ class Car {
   }
 
   void printCarDetails(){
-    System.out.println("Mein Auto ist ein " + myCar.brand
-      + " in der Farbe " + myCar.color
+    System.out.println("Mein Auto ist ein " + brand
+      + " in der Farbe " + color
       + " mit " + myCar.hp + " PS"
-      + " und hat das Nummernschild " + myCar.licensePlate
-      + " Räderfarbe: " + myCar.wheelColor.name + "(HexCode: " + myCar.wheelColor.colorHexCode + ")");
+      + " und hat das Nummernschild " + licensePlate
+      + " Räderfarbe: " + wheelColor.name + "(HexCode: " + colorHexCode + ")");
   }
 
 
