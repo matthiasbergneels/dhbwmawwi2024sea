@@ -2,28 +2,35 @@ package lecture.chapter5;
 
 public class Car {
 
+  // Deklaration der Klassen-Attribute für die Klasse Auto
+  private static int carCount;
+
   // Deklaration der Instanz-Attribute für die Klasse Auto
   private String color;
   private int hp;
   private double speed;
   private String licensePlate;
-  final public String brand;
+  final public CarBrand brand;
   private Color wheelColor;
 
   // Konstruktor-Definition
-  public Car(String color, int hp, String licensePlate, String brand, Color wheelColor){
+  public Car(String color, int hp, String licensePlate, CarBrand brand, Color wheelColor){
     this.setColor(color);
     this.hp = hp;
     this.licensePlate = licensePlate;
-    if(brand.equals("Mercedes") || brand.equals("BMW") || brand.equals("Mitsubishi")){
-      this.brand = brand;
-    }else{
-      this.brand = "Mitsubishi";
-    }
-
+    this.brand = brand;
     this.wheelColor = wheelColor;
-
     this.speed = 0.0;
+
+    carCount++;
+  }
+
+  public Car(){
+    this("Pink", 240, "HD HH-1234", CarBrand.BMW, new Color());
+  }
+
+  public Car(String color){
+    this(color, 240, "HD HH-1234", CarBrand.BMW, new Color());
   }
 
   // Definition der Instanz-Methoden für die Klasse Auto
@@ -80,5 +87,8 @@ public class Car {
     this.hp = hp;
   }
 
+  public static int getCarCount(){
+    return carCount;
+  }
 }
 

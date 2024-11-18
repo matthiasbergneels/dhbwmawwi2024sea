@@ -1,6 +1,7 @@
 package lecture.chapter5.subpackage;
 
 import lecture.chapter5.Car;
+import lecture.chapter5.CarBrand;
 import lecture.chapter5.Color;
 
 // Sichtbarkeit über Paketgrenzen
@@ -15,7 +16,7 @@ public class CarRunDifferentPackage {
     myWheelColor.colorHexCode = 0xFF9797;
     myWheelColor.name = "Pink";
 
-    myCar = new Car("pink", 500, "HH-BB 1234", "Mitsubishi", myWheelColor);
+    myCar = new Car("pink", 500, "HH-BB 1234", CarBrand.MITSUBISHI, myWheelColor);
     /*
     myCar.color = "Pink";
     myCar.hp = 500;
@@ -25,7 +26,7 @@ public class CarRunDifferentPackage {
      */
 
 
-    Car yourCar = new Car("lila", 100, "MA-MA 5678", "Mercedes", new Color()
+    Car yourCar = new Car("lila", 100, "MA-MA 5678", CarBrand.MERCEDES, new Color()
     );
     /*
     yourCar.color = "Schwarz";

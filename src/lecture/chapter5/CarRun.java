@@ -4,6 +4,8 @@ public class CarRun {
 
   public static void main(String[] args) {
 
+    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
+
     // Deklaration einer Variable Car um auf ein Auto-Objekt zugreifen zu können
     Car myCar;
 
@@ -11,7 +13,7 @@ public class CarRun {
     myWheelColor.colorHexCode = 0xFF9797;
     myWheelColor.name = "Pink";
 
-    myCar = new Car("pink", 500, "HH-BB 1234", "Mitsubishi", myWheelColor);
+    myCar = new Car("pink", 500, "HH-BB 1234", CarBrand.MITSUBISHI, myWheelColor);
     /*
     myCar.color = "Pink";
     myCar.hp = 500;
@@ -21,7 +23,7 @@ public class CarRun {
      */
 
 
-    Car yourCar = new Car("lila", 100, "MA-MA 5678", "Mercedes", new Color()
+    Car yourCar = new Car("lila", 100, "MA-MA 5678", CarBrand.MERCEDES, new Color()
     );
     /*
     yourCar.color = "Schwarz";
@@ -60,5 +62,13 @@ public class CarRun {
 
     myCar.printCarDetails();
 
+    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
+
+    new Car();
+    new Car();
+    new Car();
+    new Car();
+
+    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
   }
 }
