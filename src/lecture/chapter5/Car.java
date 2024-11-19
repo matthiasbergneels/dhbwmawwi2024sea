@@ -13,6 +13,12 @@ public class Car {
   final public CarBrand brand;
   private Colour wheelColour;
 
+
+  // "Klassen"-Konstrutor
+  static {
+    carCount = 0;
+  }
+
   // Konstruktor-Definition
   public Car(String color, int hp, String licensePlate, CarBrand brand, Colour wheelColour){
     this.setColour(color);
@@ -49,7 +55,7 @@ public class Car {
   }
 
   protected void printCarDetails(){
-    System.out.println("Das Auto ist ein " + this.brand
+    System.out.println("Das Auto ist ein " + this.brand + "(" + this.brand.getPriceRange()  + ")"
       + " in der Farbe " + this.colour
       + " mit " + this.hp + " PS"
       + " und hat das Nummernschild " + this.licensePlate
@@ -89,6 +95,13 @@ public class Car {
 
   public static int getCarCount(){
     return carCount;
+  }
+
+
+  protected void finalize(){
+    System.out.println("Folgendes Auto wird verschrottet:");
+    this.printCarDetails();
+    carCount--;
   }
 }
 

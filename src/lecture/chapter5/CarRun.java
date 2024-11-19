@@ -69,6 +69,29 @@ public class CarRun {
     new Car();
     new Car();
 
+
+
+    System.gc();
+
+    try {
+      Thread.sleep(1500);
+    }catch(Exception e) {
+      e.printStackTrace();
+    }
+
+    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
+
+    myCar = null;
+    yourCar = new Car();
+
+    System.gc();
+
+    try {
+      Thread.sleep(1500);
+    }catch(Exception e) {
+      e.printStackTrace();
+    }
+
     System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
   }
 }
