@@ -1,6 +1,6 @@
 package lecture.chapter5;
 
-public class Color {
+public class Colour {
   public int colorHexCode;
   public String name;
 }

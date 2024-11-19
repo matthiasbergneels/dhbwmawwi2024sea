@@ -6,31 +6,31 @@ public class Car {
   private static int carCount;
 
   // Deklaration der Instanz-Attribute für die Klasse Auto
-  private String color;
+  private String colour;
   private int hp;
   private double speed;
   private String licensePlate;
   final public CarBrand brand;
-  private Color wheelColor;
+  private Colour wheelColour;
 
   // Konstruktor-Definition
-  public Car(String color, int hp, String licensePlate, CarBrand brand, Color wheelColor){
-    this.setColor(color);
+  public Car(String color, int hp, String licensePlate, CarBrand brand, Colour wheelColour){
+    this.setColour(color);
     this.hp = hp;
     this.licensePlate = licensePlate;
     this.brand = brand;
-    this.wheelColor = wheelColor;
+    this.wheelColour = wheelColour;
     this.speed = 0.0;
 
     carCount++;
   }
 
   public Car(){
-    this("Pink", 240, "HD HH-1234", CarBrand.BMW, new Color());
+    this("Pink", 240, "HD HH-1234", CarBrand.BMW, new Colour());
   }
 
-  public Car(String color){
-    this(color, 240, "HD HH-1234", CarBrand.BMW, new Color());
+  public Car(String colour){
+    this(colour, 240, "HD HH-1234", CarBrand.BMW, new Colour());
   }
 
   // Definition der Instanz-Methoden für die Klasse Auto
@@ -50,33 +50,33 @@ public class Car {
 
   protected void printCarDetails(){
     System.out.println("Das Auto ist ein " + this.brand
-      + " in der Farbe " + this.color
+      + " in der Farbe " + this.colour
       + " mit " + this.hp + " PS"
       + " und hat das Nummernschild " + this.licensePlate
-      + " Räderfarbe: " + this.wheelColor.name + "(HexCode: " + this.wheelColor.colorHexCode + ")");
+      + " Räderfarbe: " + this.wheelColour.name + "(HexCode: " + this.wheelColour.colorHexCode + ")");
   }
 
   public double getSpeed(){
     return this.speed;
   }
 
-  public void setColor(String color){
-    if(color.equals("rot") ||
-        color.equals("schwarz") ||
-        color.equals("pink") ||
-        color.equals("grün") ||
-        color.equals("grau")){
-      this.color = color;
+  public void setColour(String colour){
+    if(colour.equals("rot") ||
+        colour.equals("schwarz") ||
+        colour.equals("pink") ||
+        colour.equals("grün") ||
+        colour.equals("grau")){
+      this.colour = colour;
     }else {
-      if(this.color == null){
-        this.color = "grau";
+      if(this.colour == null){
+        this.colour = "grau";
       }
     }
 
   }
 
-  public String getColor(){
-    return this.color;
+  public String getColour(){
+    return this.colour;
   }
 
   public int getHp(){
