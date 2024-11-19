@@ -11,6 +11,12 @@ public class Haus {
   public static final int DEFAULT_PLZ = 69190;
   public static final String DEFAULT_ORT = "Walldorf";
 
+  public enum BuildType{
+    FENSTER,
+    TUEREN,
+    ETAGEN
+  }
+
   private int tueren;
   private int fenster;
   private int etagen;
@@ -23,9 +29,59 @@ public class Haus {
 
   private static int objCount;
 
+
+
+  // Factory-Methode Pattern für einzelne Attribute
+  public static Haus baueHausMitFenstern(int fenster){
+    Haus neuesHaus = new Haus();
+    neuesHaus.setFenster(fenster);
+    return neuesHaus;
+  }
+
+  public static Haus baueHausMitTueren(int tueren){
+    Haus neuesHaus = new Haus();
+    neuesHaus.setTueren(tueren);
+    return neuesHaus;
+  }
+
+  public static Haus baueHausMitTuerenUndEtagen(int tueren, int etagen){
+    Haus neuesHaus = new Haus();
+    neuesHaus.setTueren(tueren);
+    neuesHaus.setEtagen(etagen);
+    return neuesHaus;
+  }
+
   public Haus() {
     this(DEFAULT_TUEREN_ANZAHL, DEFAULT_FENSTER_ANZAHL, DEFAULT_ETAGEN_ANZAHL, DEFAULT_FLAECHE, DEFAULT_STRASSE, DEFAULT_HAUSNUMMER, DEFAULT_PLZ, DEFAULT_ORT, false);
   }
+
+  // Türen Konstruktor
+  public Haus(int tueren) {
+    this(tueren, DEFAULT_FENSTER_ANZAHL, DEFAULT_ETAGEN_ANZAHL, DEFAULT_FLAECHE, DEFAULT_STRASSE, DEFAULT_HAUSNUMMER, DEFAULT_PLZ, DEFAULT_ORT, false);
+  }
+
+  // Nicht so die geilste Lösung!
+  // Fenster Konstruktor
+  public Haus(byte fenster) {
+    this(DEFAULT_TUEREN_ANZAHL, fenster, DEFAULT_ETAGEN_ANZAHL, DEFAULT_FLAECHE, DEFAULT_STRASSE, DEFAULT_HAUSNUMMER, DEFAULT_PLZ, DEFAULT_ORT, false);
+  }
+
+  // Nicht so die geilste Lösung!
+  // Etagen Konstruktor
+  public Haus(short etagen) {
+    this(DEFAULT_TUEREN_ANZAHL, DEFAULT_FENSTER_ANZAHL, etagen, DEFAULT_FLAECHE, DEFAULT_STRASSE, DEFAULT_HAUSNUMMER, DEFAULT_PLZ, DEFAULT_ORT, false);
+  }
+
+
+public Haus(BuildType buildType, int dependingOnBuildType) {
+    this();
+    switch(buildType) {
+      case FENSTER -> setFenster(dependingOnBuildType);
+      case TUEREN -> setTueren(dependingOnBuildType);
+      case ETAGEN -> setEtagen(dependingOnBuildType);
+    }
+}
+
 
   public Haus(int tueren, int fenster, int etagen, double flaeche, String straße, String hausnummer, int plz, String ort, boolean flachDach) {
     this.setTueren(tueren);
