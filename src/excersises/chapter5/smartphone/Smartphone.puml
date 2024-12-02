@@ -1,0 +1,29 @@
+@startuml
+!theme vibrant
+scale 800 width
+skinparam classAttributeIconSize 0
+
+
+enum SmartphoneType {
+    ANDROID
+    IOS
+}
+
+class Smartphone {
+    - brand : String
+    - model : String
+    - price : double
+    - type : SmartphoneType
+    + Smartphone(brand : String, model : String, price : double, type : SmartphoneType)
+    + setBrand(brand : String)
+    + setModel(model : String)
+    + setPrice(price : double)
+    + setType(type : SmartphoneType)
+    + getBrand() : String
+    + getModel() : String
+    + getPrice() : double
+    + getType() : SmartphoneType
+    + printDetails() : void
+    + printDetails(message : String) : void
+}
+@enduml
