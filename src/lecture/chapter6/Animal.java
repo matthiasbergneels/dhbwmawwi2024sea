@@ -23,4 +23,20 @@ public class Animal {
   public void move(){
     System.out.println("Das Tier " + this.description + " bewegt sich!");
   }
+
+  public float getWeight() {
+    return weight;
+  }
+
+  public float getSize() {
+    return size;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public String toString() {
+    return "Das Tier " + this.description + " und wiegt " + this.weight + "kg ist " + this.size + "cm groß";
+  }
 }

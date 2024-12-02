@@ -23,7 +23,7 @@ public class CarRun {
      */
 
 
-    Car yourCar = new Car("lila", 100, "MA-MA 5678", CarBrand.MERCEDES, new Colour()
+    Car yourCar = new Car("lila", 100, "MA-MA 5678", CarBrand.TESLA, new Colour()
     );
     /*
     yourCar.color = "Schwarz";

@@ -5,7 +5,12 @@ public enum CarBrand {
   FIAT("$"),
   BMW("$$$"),
   PEUGEOT("$"),
-  TESLA("$$"),
+  TESLA("$$"){
+    @Override
+    public String toString() {
+      return super.toString() + " voll elektrisch";
+    }
+  },
   MITSUBISHI("$"),
   FERRARI("$$$$$");
 
@@ -17,6 +22,19 @@ public enum CarBrand {
 
   public String getPriceRange() {
     return priceRange;
+  }
+
+  @Override
+  public String toString() {
+    return switch(this){
+      case MERCEDES -> "Mercedes";
+      case FIAT -> "Fiat";
+      case BMW -> "BMW";
+      case PEUGEOT -> "Peugeot";
+      case TESLA -> "Tesla";
+      case MITSUBISHI -> "Mitsubishi";
+      case FERRARI -> "Ferrari";
+    };
   }
 
 

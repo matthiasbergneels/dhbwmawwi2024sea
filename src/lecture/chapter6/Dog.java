@@ -15,6 +15,18 @@ public class Dog extends Animal {
   }
 
   public void bark(){
-    System.out.println("Der Hund "  + this.description + " bellt!");
+    System.out.println("Der Hund "  + this.getDescription() + " bellt!");
+  }
+
+
+  @Override
+  public void eat(){
+    super.eat();
+    System.out.println("und zwar Fleisch weil es ein Hund ist!");
+  }
+
+  @Override
+   public String toString() {
+    return super.toString() + " und ist ein Hund der Rasse " + breed;
   }
 }
