@@ -1,9 +1,12 @@
 package lecture.chapter5;
 
+import java.util.ArrayList;
+
 public class Car {
 
   // Deklaration der Klassen-Attribute für die Klasse Auto
   private static int carCount;
+  private static ArrayList<Car> carRegister;
 
   // Deklaration der Instanz-Attribute für die Klasse Auto
   private String colour;
@@ -14,9 +17,12 @@ public class Car {
   private Colour wheelColour;
 
 
+
+
   // "Klassen"-Konstrutor
   static {
     carCount = 0;
+    carRegister = new ArrayList<>();
   }
 
   // Konstruktor-Definition
@@ -29,6 +35,7 @@ public class Car {
     this.speed = 0.0;
 
     carCount++;
+    carRegister.add(this);
   }
 
   public Car(){
@@ -102,6 +109,17 @@ public class Car {
     System.out.println("Folgendes Auto wird verschrottet:");
     this.printCarDetails();
     carCount--;
+  }
+
+  public Car reColorCar(Car car){
+    car.colour = "SpecialColorRed";
+    return car;
+  }
+
+  public void reColorAllCars(){
+    for(Car car : carRegister){
+      car.colour = "SpecialColorRed";
+    }
   }
 }
 
