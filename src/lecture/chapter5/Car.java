@@ -111,14 +111,14 @@ public class Car {
     carCount--;
   }
 
-  public Car reColorCar(Car car){
-    car.colour = "SpecialColorRed";
-    return car;
+  public static void reColorCar(String colour, Car currentCar){
+      //currentCar.setColour(colour);
+      currentCar.colour = colour;
   }
 
-  public void reColorAllCars(){
-    for(Car car : carRegister){
-      car.colour = "SpecialColorRed";
+  public static void reColorAllCars(String colour){
+    for(Car currentCar : carRegister){
+      currentCar.colour = colour;
     }
   }
 }

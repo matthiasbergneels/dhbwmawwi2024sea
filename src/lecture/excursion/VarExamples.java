@@ -1,4 +1,4 @@
-package lecture.excurs;
+package lecture.excursion;
 
 public class VarExamples {
 
