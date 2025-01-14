@@ -1,0 +1,16 @@
+@startuml
+!theme vibrant
+scale 800 width
+skinparam classAttributeIconSize 0
+
+class Book {
+    - title : String
+    - author : String
+    - pages : int
+    - price : double
+    - {static} bookCount : int
+    + Book(title : String, author : String, pages : int, price : double)
+    + {static} getBookCount() : int
+    + printDetails()
+}
+@enduml

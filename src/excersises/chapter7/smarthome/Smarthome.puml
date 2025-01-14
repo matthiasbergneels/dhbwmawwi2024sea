@@ -1,0 +1,40 @@
+@startuml
+!theme vibrant
+scale 800 width
+skinparam classAttributeIconSize 0
+
+interface HomeControllable {
+    + turnOn()
+    + turnOff()
+}
+
+enum Room {
+    LIVING_ROOM
+    BEDROOM
+    KITCHEN
+    BATHROOM
+}
+
+class CeilingLamp implements HomeControllable {
+    - room : Room
+    + CeilingLamp(room : Room)
+    + turnOn()
+    + turnOff()
+}
+
+class VacuumCleaner implements HomeControllable {
+    + turnOn()
+    + turnOff()
+}
+
+class CoffeeMachine implements HomeControllable {
+    + turnOn()
+    + turnOff()
+}
+
+class Television implements HomeControllable {
+    + turnOn()
+    + turnOff()
+}
+
+@enduml

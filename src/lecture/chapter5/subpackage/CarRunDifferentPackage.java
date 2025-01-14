@@ -1,10 +1,13 @@
-package lecture.chapter5;
+package lecture.chapter5.subpackage;
 
-public class CarRun {
+import lecture.chapter5.Car;
+import lecture.chapter5.CarBrand;
+import lecture.chapter5.Colour;
+
+// Sichtbarkeit über Paketgrenzen
+public class CarRunDifferentPackage {
 
   public static void main(String[] args) {
-
-    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
 
     // Deklaration einer Variable Car um auf ein Auto-Objekt zugreifen zu können
     Car myCar;
@@ -23,7 +26,7 @@ public class CarRun {
      */
 
 
-    Car yourCar = new Car("lila", 100, "MA-MA 5678", CarBrand.TESLA, new Colour()
+    Car yourCar = new Car("lila", 100, "MA-MA 5678", CarBrand.MERCEDES, new Colour()
     );
     /*
     yourCar.color = "Schwarz";
@@ -36,8 +39,8 @@ public class CarRun {
     yourCar.wheelColor.colorHexCode = 0xFF0000;
      */
 
-    myCar.printCarDetails();
-    yourCar.printCarDetails();
+    // myCar.printCarDetails(); // --> printCarDetails() nicht verfügbar, da protected
+    // yourCar.printCarDetails(); // --> printCarDetails() nicht verfügbar, da protected
 
     System.out.println("Mein Auto fährt " + myCar.getSpeed() + " km/h");
     System.out.println("Dein Auto fährt " + yourCar.getSpeed() + " km/h");
@@ -60,38 +63,7 @@ public class CarRun {
      */
     myCar.setColour("kack braun");
 
-    myCar.printCarDetails();
+    // myCar.printCarDetails(); // --> printCarDetails() nicht verfügbar, da protected
 
-    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
-
-    new Car();
-    new Car();
-    new Car();
-    new Car();
-
-
-
-    System.gc();
-
-    try {
-      Thread.sleep(1500);
-    }catch(Exception e) {
-      e.printStackTrace();
-    }
-
-    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
-
-    myCar = null;
-    yourCar = new Car();
-
-    System.gc();
-
-    try {
-      Thread.sleep(1500);
-    }catch(Exception e) {
-      e.printStackTrace();
-    }
-
-    System.out.println("Aktuell gibt es " + Car.getCarCount() + " Autos.");
   }
 }

@@ -1,34 +1,59 @@
 package lecture.chapter5;
 
-class Car {
+import java.util.ArrayList;
+
+public class Car {
+
+  // Deklaration der Klassen-Attribute für die Klasse Auto
+  private static int carCount;
+  private static ArrayList<Car> carRegister;
 
   // Deklaration der Instanz-Attribute für die Klasse Auto
-  String color;
-  int hp;
-  double speed;
-  String licensePlate;
-  String brand;
-  Color wheelColor;
+  private String colour;
+  private int hp;
+  private double speed;
+  private String licensePlate;
+  final public CarBrand brand;
+  private Colour wheelColour;
+
+
+
+
+  // "Klassen"-Konstrutor
+  static {
+    carCount = 0;
+    carRegister = new ArrayList<>();
+  }
 
   // Konstruktor-Definition
-  Car(String color, int hp, String licensePlate, String brand, Color wheelColor){
-    this.color = color;
+  public Car(String color, int hp, String licensePlate, CarBrand brand, Colour wheelColour){
+    this.setColour(color);
     this.hp = hp;
     this.licensePlate = licensePlate;
     this.brand = brand;
-    this.wheelColor = wheelColor;
-
+    this.wheelColour = wheelColour;
     this.speed = 0.0;
+
+    carCount++;
+    carRegister.add(this);
+  }
+
+  public Car(){
+    this("Pink", 240, "HD HH-1234", CarBrand.BMW, new Colour());
+  }
+
+  public Car(String colour){
+    this(colour, 240, "HD HH-1234", CarBrand.BMW, new Colour());
   }
 
   // Definition der Instanz-Methoden für die Klasse Auto
-  void accelerate(double deltaSpeed){
-    if(deltaSpeed > 0) {
+  public void accelerate(double deltaSpeed){
+    if(deltaSpeed > 0 && deltaSpeed <= 50) {
       this.speed += deltaSpeed;
     }
   }
 
-  void brake(){
+  public void brake(){
     // um 5 km/h abbremsen
     this.speed -= 5;
     if(this.speed < 0){
@@ -36,14 +61,65 @@ class Car {
     }
   }
 
-  void printCarDetails(){
-    System.out.println("Mein Auto ist ein " + brand
-      + " in der Farbe " + color
-      + " mit " + myCar.hp + " PS"
-      + " und hat das Nummernschild " + licensePlate
-      + " Räderfarbe: " + wheelColor.name + "(HexCode: " + colorHexCode + ")");
+  protected void printCarDetails(){
+    System.out.println("Das Auto ist ein " + this.brand + "(" + this.brand.getPriceRange()  + ")"
+      + " in der Farbe " + this.colour
+      + " mit " + this.hp + " PS"
+      + " und hat das Nummernschild " + this.licensePlate
+      + " Räderfarbe: " + this.wheelColour.name + "(HexCode: " + this.wheelColour.colorHexCode + ")");
+  }
+
+  public double getSpeed(){
+    return this.speed;
+  }
+
+  public void setColour(String colour){
+    if(colour.equals("rot") ||
+        colour.equals("schwarz") ||
+        colour.equals("pink") ||
+        colour.equals("grün") ||
+        colour.equals("grau")){
+      this.colour = colour;
+    }else {
+      if(this.colour == null){
+        this.colour = "grau";
+      }
+    }
+
+  }
+
+  public String getColour(){
+    return this.colour;
+  }
+
+  public int getHp(){
+    return this.hp;
+  }
+
+  public void setHp(int hp){
+    this.hp = hp;
+  }
+
+  public static int getCarCount(){
+    return carCount;
   }
 
 
+  protected void finalize(){
+    System.out.println("Folgendes Auto wird verschrottet:");
+    this.printCarDetails();
+    carCount--;
+  }
+
+  public static void reColorCar(String colour, Car currentCar){
+      //currentCar.setColour(colour);
+      currentCar.colour = colour;
+  }
+
+  public static void reColorAllCars(String colour){
+    for(Car currentCar : carRegister){
+      currentCar.colour = colour;
+    }
+  }
 }
 
