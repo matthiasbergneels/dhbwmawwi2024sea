@@ -1,4 +1,4 @@
-package excursion.junit;
+package lecture.excursion.junit;
 
 public class CalculatorRun {
 

@@ -1,12 +1,17 @@
 package lecture.excursion.junit;
 
-public class Calculator {
+class Calculator {
 
-  public int add(int a, int b) {
-        return a + b;
-    }
+  double add(double a, double b) {
+    return a + b;
+  }
 
-    public int subtract(int a, int b) {
-      return a - b;
-    }
+  double subtract(double a, double b) {
+    return a - b;
+  }
+
+  double multiply(double a, double b) {
+    return a * b;
+  }
+
 }
