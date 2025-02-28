@@ -12,7 +12,12 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 class CalculatorTest {
 
@@ -133,22 +138,63 @@ class CalculatorTest {
     }
   }
 
-  @ParameterizedTest(name="{0} multiplied with {1} should result in {2}")
-  @Tag("IntegrationTest")
-  @CsvSource({
-    "10.0, 10.0, 100.0",
-    "5.0, 2.0, 10.0",
-    "100, 0, 0",
-    "-1, 5.0, -5.0"
-  })
-  void multiply(double numberA, double numberB, double expectedResult) {
-    System.out.println("multiply test");
-    // Arrange
+  @Nested
+  class MultiplyTestCases {
 
-    // Act
-    double result = calcUnderTest.multiply(numberA, numberB);
+    @ParameterizedTest(name = "{0} multiplied with {1} should result in {2}")
+    @Tag("IntegrationTest")
+    @CsvSource({
+      "10.0, 10.0, 100.0",
+      "5.0, 2.0, 10.0",
+      "100, 0, 0",
+      "-1, 5.0, -5.0"
+    })
+    void multiply(double numberA, double numberB, double expectedResult) {
+      System.out.println("multiply test CSVSource");
+      // Arrange
 
-    // Assert
-    assertEquals(expectedResult, result);
+      // Act
+      double result = calcUnderTest.multiply(numberA, numberB);
+
+      // Assert
+      assertEquals(expectedResult, result);
+    }
+
+    @ParameterizedTest(name = "{0} multiplied with {1} should result in {2}")
+    @DisplayName("Multiply Test Case - parameterized by Source CSV-File")
+    @CsvFileSource(resources = "/MultiplyTestCases.csv")
+    void multiplyParamterized(double numberA, double numberB, double expectedResult) {
+      System.out.println("Test - multiply - csv file source");
+      // Arrange
+
+      // Act
+      double result = calcUnderTest.multiply(numberA, numberB);
+
+      // Assert
+      assertEquals(expectedResult, result);
+    }
+
+    @ParameterizedTest(name = "{0} multiplied with {1} should result in {2}")
+    @DisplayName("Multiply Test Case - parameterized by Source Method")
+    @MethodSource("lecture.excursion.junit.CalculatorTest#provideMultiplyTestCases")
+    void multiplyParamterizedWithMethod(double numberA, double numberB, double expectedResult) {
+      System.out.println("Test - multiply - method source");
+      // Arrange
+
+      // Act
+      double result = calcUnderTest.multiply(numberA, numberB);
+
+      // Assert
+      assertEquals(expectedResult, result);
+    }
+  }
+
+
+  static Stream provideMultiplyTestCases(){
+    return Stream.of(
+      Arguments.of(10.0, 10.0, 100.0),
+      Arguments.of(5.0, 4.0, 20.0)
+      // ...
+    );
   }
 }
