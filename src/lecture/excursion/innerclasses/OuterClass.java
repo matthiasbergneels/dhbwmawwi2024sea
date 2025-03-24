@@ -42,12 +42,17 @@ public class OuterClass {
 
   public void printMessageFromSecondInnerLocalClass(String message){
     class InnerLocalClass{
+      private String localClassIdentifier;
+
+      InnerLocalClass(String localClassIdentifier){
+        this.localClassIdentifier = localClassIdentifier;
+      }
       public void printMessage(String message){
         System.out.println("Nachricht: " + message + " - from " + this.getClass().getName() + " Identifier: " + objectIdentifier);
       }
     }
 
-    InnerLocalClass myInnerLocalClass = new InnerLocalClass();
+    InnerLocalClass myInnerLocalClass = new InnerLocalClass("INNERIdentifier3121");
     myInnerLocalClass.printMessage(message);
   }
 
@@ -66,6 +71,16 @@ public class OuterClass {
 
     myInnerAnonymousClass.printMessage(message);
     mySecondInnerAnonymousClass.printMessage(message);
+  }
+
+  public void printMessageFromLambdaFunction(String message){
+
+    Printable myLambdaFunction = (pMessage)->{
+      System.out.println("Nachricht: " + pMessage + " - from " + this.getClass().getName() + " Identifier: " + objectIdentifier);
+    };
+
+    myLambdaFunction.printMessage(message);
+
   }
 
   public static void main(String[] args) {
@@ -92,6 +107,10 @@ public class OuterClass {
 
     myOuterClass.printMessageFromInnerAnonymousClass(message);
     mySecondOuterClass.printMessageFromInnerAnonymousClass(message);
+
+    myOuterClass.printMessageFromLambdaFunction(message);
+
+
 
   }
 
