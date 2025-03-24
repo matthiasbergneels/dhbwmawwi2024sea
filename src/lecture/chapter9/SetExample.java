@@ -1,9 +1,8 @@
 package lecture.chapter9;
 
 import com.sun.source.tree.Tree;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+
+import java.util.*;
 
 public class SetExample {
 
@@ -26,7 +25,7 @@ public class SetExample {
 
     Set<Student> students = new TreeSet<>();
 
-    students.add(new Student(4711, "Anna", 21, "Müller"));
+    students.add(new Student(4711, "Anna", 21, "MüllermitM"));
     students.add(new Student(5813, "Klaus", 23, "Zeus"));
     students.add(new Student(2138, "Aneta", 25, "Frech"));
     students.add(new Student(9999, "Klaus", 23, "Zeus"));
@@ -39,7 +38,52 @@ public class SetExample {
       System.out.println(currentStudent);
     }
 
-    Object test;
+
+    Set<Student> studentsSortedByNameLength = new TreeSet<>(new SortStudentByNameLength());
+
+    /*
+    for(Student currentStudent : students){
+      studentsSortedByNameLength.add(currentStudent);
+    }
+     */
+
+    studentsSortedByNameLength.addAll(students);
+
+    System.out.println("Student by Namelength: " + studentsSortedByNameLength.size());
+    for(Student currentStudent : studentsSortedByNameLength){
+      System.out.println(currentStudent);
+    }
+
+
+
+
+    // Sorting with Lists
+
+    List<Student> studentList = new ArrayList<>();
+    studentList.addAll(students);
+
+    System.out.println("Student list - initial sortiert:");
+    for(Student currentStudent : studentList){
+      System.out.println(currentStudent);
+    }
+
+    studentList.sort(new SortStudentByNameLength());
+    System.out.println("Student list - nach Namenslänge sortiert:");
+    for(Student currentStudent : studentList){
+      System.out.println(currentStudent);
+    }
+
+    Collections.sort(studentList);
+    System.out.println("Student list - initial sortiert:");
+    for(Student currentStudent : studentList){
+      System.out.println(currentStudent);
+    }
+
+    Collections.sort(studentList, new SortStudentByAge());
+    System.out.println("Student list - nach Alter sortiert:");
+    for(Student currentStudent : studentList){
+      System.out.println(currentStudent);
+    }
 
 
   }
