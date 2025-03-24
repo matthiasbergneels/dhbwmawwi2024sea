@@ -85,6 +85,12 @@ public class SetExample {
       System.out.println(currentStudent);
     }
 
+    Collections.sort(studentList, (s1, s2) -> s1.getStudentId() - s2.getStudentId());
+    System.out.println("Student list - nach MatrikelNummer sortiert:");
+    for(Student currentStudent : studentList){
+      System.out.println(currentStudent);
+    }
+
 
   }
 }
