@@ -85,11 +85,26 @@ public class SetExample {
       System.out.println(currentStudent);
     }
 
+    // Sort by Age --> Anonyme Klasse
+    Collections.sort(studentList, new Comparator<Student>() {
+      @Override
+      public int compare(Student o1, Student o2) {
+        return o1.getAge() - o2.getAge();
+      }
+    });
+
     Collections.sort(studentList, (s1, s2) -> s1.getStudentId() - s2.getStudentId());
     System.out.println("Student list - nach MatrikelNummer sortiert:");
     for(Student currentStudent : studentList){
       System.out.println(currentStudent);
     }
+
+    Collections.sort(studentList, Student.SORT_BY_GRADE);
+    System.out.println("Student list - nach Average Grade sortiert:");
+    for(Student currentStudent : studentList){
+      System.out.println(currentStudent);
+    }
+
 
 
   }
