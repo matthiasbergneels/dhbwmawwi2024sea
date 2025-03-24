@@ -1,11 +1,14 @@
 package lecture.chapter9;
 
+import java.util.Objects;
+
 public class Student implements Comparable<Student> {
 
   private int studentId;
   private String name;
   private int age;
   private String familyName;
+  private double gradeAverage;
 
   public Student(int studentId, String name, int age, String familyName) {
     this.studentId = studentId;
@@ -67,17 +70,17 @@ public class Student implements Comparable<Student> {
     return 0;
   }
 
+
   @Override
   public boolean equals(Object o){
     if(this == o) {
       return true;
     }
-    if(o == null){
+
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if(!(o instanceof Student)) {
-      return false;
-    }
+
     Student student = (Student) o;
     if(studentId != student.studentId) {
       return false;
@@ -93,6 +96,38 @@ public class Student implements Comparable<Student> {
     }
     return true;
   }
+
+  /*
+  public int hashCode(){
+    return this.studentId ^ this.familyName.hashCode() ^ this.name.hashCode() ^ this.age;
+  }
+
+   */
+
+  @Override
+  public int hashCode() {
+    int result = studentId;
+    result = 31 * result + Objects.hashCode(name);
+    result = 31 * result + age;
+    result = 31 * result + Objects.hashCode(familyName);
+    result = 31 * result + Double.hashCode(gradeAverage);
+    return result;
+  }
+
+  /*
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    Student student = (Student) o;
+    return studentId == student.studentId && age == student.age && Objects.equals(name, student.name) &&
+      Objects.equals(familyName, student.familyName);
+  }
+
+   */
+
 
   @Override
   public String toString() {
