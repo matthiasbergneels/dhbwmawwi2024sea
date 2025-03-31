@@ -86,7 +86,6 @@ public class OuterClass {
   public static void main(String[] args) {
     String message = "Nachricht von unseren Klassen!";
 
-
     OuterClass myOuterClass = new OuterClass("ID4711");
     OuterClass mySecondOuterClass = new OuterClass("ID5843");
     myOuterClass.printMessage(message);
