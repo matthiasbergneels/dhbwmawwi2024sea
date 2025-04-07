@@ -13,15 +13,39 @@ import java.util.Map;
 
 public class Logon extends JFrame {
 
+  private static final String ACTION_LOGIN = "LOGIN";
+  private static final String ACTION_CLOSE = "CLOSE";
+  private static final String ACTION_PRINT = "PRINT";
+
   // Implementierung als Singleton (Singleton-Pattern)
   private static Logon singleLogonInstance = null;
   private static final Map<String, String> USER_LIST;
 
   public static enum PROTOCOLS{
-    FTP,
-    SSH,
-    HTTP,
-    HTTPS
+    FTP(21),
+    SSH(22),
+    HTTP(80),
+    HTTPS(443);
+
+    private int defaultPort;
+
+    PROTOCOLS(int defaultPort){
+      this.defaultPort = defaultPort;
+    }
+
+    public int getDefaultPort(){
+      return defaultPort;
+    }
+
+    @Override
+    public String toString() {
+      switch(this){
+        case HTTPS:
+          return "HTTP(s) (" + getDefaultPort() + ")";
+        default:
+          return super.toString() +  " (" + getDefaultPort() + ")";
+      }
+    }
   }
 
 
@@ -65,13 +89,7 @@ public class Logon extends JFrame {
         System.out.println("Änderungszustand: " + e.getStateChange());
         System.out.println("Parameter String: " + e.paramString());
         if(e.getStateChange() == ItemEvent.SELECTED) {
-          switch(e.getItem().toString()){
-            case "FTP":
-              portField.setText("21");
-              break;
-            case "SSH":
-              portField.setText("22");
-          }
+          portField.setText("" + ((PROTOCOLS)e.getItem()).getDefaultPort());
         }
       }
     };
@@ -143,20 +161,32 @@ public class Logon extends JFrame {
     filePanel.add(flowLayoutForCell);
 
     // create & assign Buttons
-    JButton okButton = new JButton("Ok");
+    JButton okButton = new JButton("Login");
+    okButton.setActionCommand(ACTION_LOGIN);
     okButton.setName("OK_BUTTON");
     JButton cancelButton = new JButton("Beenden");
+    cancelButton.setActionCommand(ACTION_CLOSE);
     cancelButton.setName("CANCEL_BUTTON");
     JButton printButton = new JButton("Ausgabe");
-    printButton.setName("PRINT_BUTTON");
+    printButton.setActionCommand(ACTION_CLOSE);
+    printButton.setName("PRINT_PRINT");
 
+    /*
     ActionListener buttonListener = new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("Parameter String: " + e.paramString());
         System.out.println("Action Command: " + e.getActionCommand());
-        System.out.println("Modifiers: " + e.getModifiers());
+        System.out.println("Modifiers: " + e.getModifiers() + " " + Integer.toBinaryString(e.getModifiers()));
         System.out.println("Timestamp: " + e.getWhen());
 
+        System.out.println("Umschalttaste: " + Integer.toBinaryString(ActionEvent.SHIFT_MASK));
+        System.out.println("Steuerungstaste: " + Integer.toBinaryString(ActionEvent.CTRL_MASK));
+
+        if((e.getModifiers() & ActionEvent.META_MASK) ==  ActionEvent.META_MASK) {
+          System.out.println("CommandKey / WindowsKey wurde gedrückt");
+        }else {
+          System.out.println("CommandKey / WindowsKey wurde NICHT gedrückt!");
+        }
 
         if(e.getActionCommand().equals("Beenden")) {
           System.exit(0);
@@ -176,6 +206,40 @@ public class Logon extends JFrame {
 
       }
     };
+     */
+
+    ActionListener buttonListener = (e) -> {
+      System.out.println("Parameter String: " + e.paramString());
+      System.out.println("Action Command: " + e.getActionCommand());
+      System.out.println("Modifiers: " + e.getModifiers() + " " + Integer.toBinaryString(e.getModifiers()));
+      System.out.println("Timestamp: " + e.getWhen());
+
+      System.out.println("Umschalttaste: " + Integer.toBinaryString(ActionEvent.SHIFT_MASK));
+      System.out.println("Steuerungstaste: " + Integer.toBinaryString(ActionEvent.CTRL_MASK));
+
+      if((e.getModifiers() & ActionEvent.META_MASK) ==  ActionEvent.META_MASK) {
+        System.out.println("CommandKey / WindowsKey wurde gedrückt");
+      }else {
+        System.out.println("CommandKey / WindowsKey wurde NICHT gedrückt!");
+      }
+
+      if(e.getActionCommand().equals(ACTION_CLOSE)) {
+        System.exit(0);
+      }else if(e.getActionCommand().equals(ACTION_LOGIN)) {
+        // Login Routine
+        String userName = userNameField.getText();
+        String passWord = userPasswordField.getText();
+
+        String messageText = "";
+        if(passWord.equals(USER_LIST.get(userName))) {
+          messageText = "Erfolgreich eingeloggt! :>";
+        } else {
+          messageText = "Login fehlgeschlagen! :<";
+        }
+        messageTextLabel.setText(messageText);
+      }
+    };
+
 
     cancelButton.addActionListener(buttonListener);
     printButton.addActionListener(buttonListener);
