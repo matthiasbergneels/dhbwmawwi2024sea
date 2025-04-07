@@ -7,21 +7,57 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
+import java.util.Iterator;
 
-public class Logon extends JFrame {
+public class Logon extends JFrame implements ItemListener {
 
-  public Logon() throws ParseException {
+  // Implementierung als Singleton (Singleton-Pattern)
+  private static Logon singleLogonInstance = null;
+
+
+  public static Logon getSingleLogonInstance() throws ParseException {
+    if(singleLogonInstance == null) {
+      singleLogonInstance = new Logon();
+    }
+    return singleLogonInstance;
+  }
+
+  // Instanzattribute
+  private final JFormattedTextField portField;
+
+  private Logon() throws ParseException {
     super();
     this.setTitle("Logon");
     this.setAlwaysOnTop(true);
     this.setName("Logon");
     this.setResizable(false);
-    String[] protocols = {"FTP", "SSH"};
+    String[] protocols = {"FTP", "SSH", "SMTP"};
     JComboBox<String> myComboBox = new JComboBox<>(protocols);
 
-    JFormattedTextField portField = new JFormattedTextField(new MaskFormatter("#####"));
+    portField = new JFormattedTextField(new MaskFormatter("#####"));
     portField.setName("PORT_INPUTFIELD");
     portField.setColumns(3);
+
+    ItemListener comboBoxListener = new ItemListener(){
+      public void itemStateChanged(ItemEvent e) {
+        System.out.println("itemStateChanged");
+        System.out.println("Aktuelles Item: " + e.getItem());
+        System.out.println("Änderungszustand: " + e.getStateChange());
+        System.out.println("Parameter String: " + e.paramString());
+        if(e.getStateChange() == ItemEvent.SELECTED) {
+          switch(e.getItem().toString()){
+            case "FTP":
+              portField.setText("21");
+              break;
+            case "SSH":
+              portField.setText("22");
+          }
+        }
+      }
+    };
+
+    myComboBox.addItemListener(comboBoxListener);
+    myComboBox.addItemListener(this);
 
     // initialize Panels
     JPanel mainPanel = new JPanel(new BorderLayout());
@@ -63,7 +99,6 @@ public class Logon extends JFrame {
     flowLayoutForCell = new JPanel(cellFlowLayout);
     flowLayoutForCell.add(new JLabel("Port:"));
     connectionPanel.add(flowLayoutForCell);
-
     connectionPanel.add(portField);
 
     // create & add Fields for File Area
@@ -130,9 +165,28 @@ public class Logon extends JFrame {
       defaultScreenDevice.getDefaultConfiguration().getBounds().getWidth(),
       defaultScreenDevice.getDefaultConfiguration().getBounds().getHeight()));
 
-    new Logon();
+    Logon currentLogonScreen = getSingleLogonInstance();
 
     GraphicsEnvironment virtualGraphicsEvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     GraphicsDevice[] screens = virtualGraphicsEvironment.getScreenDevices();
+  }
+
+  @Override
+  public void itemStateChanged(ItemEvent e) {
+    System.out.println("itemStateChanged");
+    System.out.println("Aktuelles Item: " + e.getItem());
+    System.out.println("Änderungszustand: " + e.getStateChange());
+    System.out.println("Parameter String: " + e.paramString());
+
+
+    if(e.getStateChange() == ItemEvent.SELECTED) {
+      switch(e.getItem().toString()){
+        case "FTP":
+          portField.setText("21");
+          break;
+        case "SSH":
+          portField.setText("22");
+      }
+    }
   }
 }
