@@ -2,10 +2,12 @@ package lecture.chapter11;
 
 public class NumbersLinkedList {
 
-  Node firstNode;
+  private Node firstNode;
+  private int size = 0;
 
   public void add(int data){
     Node newNode = new Node(data);
+    size++;
 
     if(firstNode == null){
       firstNode = newNode;
@@ -28,28 +30,68 @@ public class NumbersLinkedList {
     }
 
     Node currentNode = firstNode;
-    while(currentNode.getNextNode() != null){
+    while(currentNode != null){
       System.out.print(currentNode.getData() + " ");
       currentNode = currentNode.getNextNode();
     }
 
-    System.out.print(currentNode.getData());
     System.out.println();
-
   }
 
+  /* --> O(n)
   public int size(){
-    // TODO --> Anzahl der Elemente in der Liste
-    return 0;
+    int size = 0;
+    Node currentNode = firstNode;
+    while(currentNode != null){
+      size++;
+      currentNode = currentNode.getNextNode();
+    }
+
+    return size;
+  }
+   */
+
+  // Size() --> O(1)
+  public int size(){
+    return size;
   }
 
   public boolean contains(int data){
-    // TODO --> Element in der Liste enthalten
+    Node currentNode = firstNode;
+    while(currentNode != null){
+      if(currentNode.getData() == data){
+        return true;
+      }
+      currentNode = currentNode.getNextNode();
+    }
     return false;
   }
 
   public boolean remove(int data){
     // TODO --> entferne erste gefunde Element das "data" entspricht return true; return false Element nicht enthalten
+
+    if(firstNode == null){
+      return false;
+    }
+
+    // 1. Case --> first Element should be deleted
+    if(firstNode.getData() == data){
+      firstNode = firstNode.getNextNode();
+      size--;
+      return true;
+    }
+
+    // 2. Case --> second or further Element should be deleted
+    Node currentNode = firstNode;
+    while(currentNode.getNextNode() != null){
+      if(currentNode.getNextNode().getData() == data){
+        currentNode.setNextNode(currentNode.getNextNode().getNextNode());
+        size--;
+        return true;
+      }
+      currentNode = currentNode.getNextNode();
+    }
+
     return false;
   }
 
