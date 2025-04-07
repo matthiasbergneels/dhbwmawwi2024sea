@@ -82,6 +82,7 @@ public class Logon extends JFrame {
     portField.setName("PORT_INPUTFIELD");
     portField.setColumns(3);
 
+    /*
     ItemListener comboBoxListener = new ItemListener(){
       public void itemStateChanged(ItemEvent e) {
         System.out.println("itemStateChanged");
@@ -91,6 +92,12 @@ public class Logon extends JFrame {
         if(e.getStateChange() == ItemEvent.SELECTED) {
           portField.setText("" + ((PROTOCOLS)e.getItem()).getDefaultPort());
         }
+      }
+    };
+     */
+    ItemListener comboBoxListener = (e) -> {
+      if(e.getStateChange() == ItemEvent.SELECTED) {
+        portField.setText("" + ((PROTOCOLS)e.getItem()).getDefaultPort());
       }
     };
 
@@ -269,6 +276,39 @@ public class Logon extends JFrame {
 
     this.add(mainPanel);
 
+    // MouseListener
+    MouseListener mouseListener = new MouseListener() {
+
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        System.out.println("Clicked UI Component " + ((JButton)e.getSource()).getName());
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+        System.out.println("Pressed UI Component " + ((JButton)e.getSource()).getName());
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        System.out.println("Released UI Component " + ((JButton)e.getSource()).getName());
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        System.out.println("Entered UI Component " + ((JButton)e.getSource()).getName());
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+        System.out.println("Exit UI Component " + ((JButton)e.getSource()).getName());
+      }
+    };
+
+    okButton.addMouseListener(mouseListener);
+    cancelButton.addMouseListener(mouseListener);
+    printButton.addMouseListener(mouseListener);
+
     // JMenuBar (Swing)
 
     JMenuBar frameMenuBar = new JMenuBar();
@@ -318,7 +358,7 @@ public class Logon extends JFrame {
   public static void main(String[] args) throws ParseException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
     // Set cross-platform Java L&F (also called "Metal")
-    //System.out.println(UIManager.getLookAndFeel());
+    System.out.println(UIManager.getLookAndFeel());
     //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
     //System.out.println(UIManager.getLookAndFeel());
 
