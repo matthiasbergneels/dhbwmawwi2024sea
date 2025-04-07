@@ -269,6 +269,46 @@ public class Logon extends JFrame {
 
     this.add(mainPanel);
 
+    // JMenuBar (Swing)
+
+    JMenuBar frameMenuBar = new JMenuBar();
+
+    this.setJMenuBar(frameMenuBar);
+
+    JMenu fileMenu = new JMenu("Allgemein");
+
+    frameMenuBar.add(fileMenu);
+
+    JMenuItem loginMenuItem = new JMenuItem("Einloggen");
+    loginMenuItem.setActionCommand(ACTION_LOGIN);
+    loginMenuItem.addActionListener(buttonListener);
+    JMenuItem exitMenuItem = new JMenuItem("Schließen");
+    exitMenuItem.setActionCommand(ACTION_CLOSE);
+    exitMenuItem.addActionListener(buttonListener);
+
+    fileMenu.add(loginMenuItem);
+    fileMenu.addSeparator();
+    fileMenu.add(exitMenuItem);
+
+
+    // AWT MenuBar
+    MenuBar menuBar = new MenuBar();
+    this.setMenuBar(menuBar);
+
+    Menu fileAwtMenu = new Menu("Allgemein");
+    menuBar.add(fileAwtMenu);
+
+    MenuItem loginAwtMenuItem = new MenuItem("Einloggen");
+    loginAwtMenuItem.setActionCommand(ACTION_LOGIN);
+    loginAwtMenuItem.addActionListener(buttonListener);
+    MenuItem closeAwtMenuItem = new MenuItem("Schliessen");
+    closeAwtMenuItem.setActionCommand(ACTION_CLOSE);
+    closeAwtMenuItem.addActionListener(buttonListener);
+
+    fileAwtMenu.add(loginAwtMenuItem);
+    fileAwtMenu.addSeparator();
+    fileAwtMenu.add(closeAwtMenuItem);
+
     // set JFrame behavior
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     this.pack();
