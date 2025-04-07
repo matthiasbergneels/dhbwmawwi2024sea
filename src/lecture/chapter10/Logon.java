@@ -7,12 +7,32 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
-public class Logon extends JFrame implements ItemListener {
+public class Logon extends JFrame {
 
   // Implementierung als Singleton (Singleton-Pattern)
   private static Logon singleLogonInstance = null;
+  private static final Map<String, String> USER_LIST;
+
+  public static enum PROTOCOLS{
+    FTP,
+    SSH,
+    HTTP,
+    HTTPS
+  }
+
+
+  static {
+    USER_LIST = new HashMap<>();
+
+    USER_LIST.put("admin", "SuperAdmin");
+    USER_LIST.put("user", "SuperUser");
+    USER_LIST.put("teacher", "SuperTeacher");
+
+  }
 
 
   public static Logon getSingleLogonInstance() throws ParseException {
@@ -31,8 +51,8 @@ public class Logon extends JFrame implements ItemListener {
     this.setAlwaysOnTop(true);
     this.setName("Logon");
     this.setResizable(false);
-    String[] protocols = {"FTP", "SSH", "SMTP"};
-    JComboBox<String> myComboBox = new JComboBox<>(protocols);
+
+    JComboBox<PROTOCOLS> myComboBox = new JComboBox<>(PROTOCOLS.values());
 
     portField = new JFormattedTextField(new MaskFormatter("#####"));
     portField.setName("PORT_INPUTFIELD");
@@ -57,31 +77,38 @@ public class Logon extends JFrame implements ItemListener {
     };
 
     myComboBox.addItemListener(comboBoxListener);
-    myComboBox.addItemListener(this);
 
     // initialize Panels
     JPanel mainPanel = new JPanel(new BorderLayout());
 
+    JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     JPanel southPanel = new JPanel(new FlowLayout());
     JPanel centerPanel = new JPanel(new FlowLayout());
+
 
     JPanel connectionPanel = new JPanel(new GridLayout(0, 2));
     JPanel filePanel = new JPanel(new GridLayout(0, 2));
 
     FlowLayout cellFlowLayout = new FlowLayout(FlowLayout.LEFT);
 
+    // Message Area
+    JLabel messageTextLabel = new JLabel("");
+    northPanel.add(messageTextLabel);
+
     //create & assign elements for connection area
     JPanel flowLayoutForCell = new JPanel(cellFlowLayout);
     flowLayoutForCell.add(new JLabel("User:"));
     connectionPanel.add(flowLayoutForCell);
     flowLayoutForCell = new JPanel(cellFlowLayout);
-    flowLayoutForCell.add(new JTextField(3));
+    JTextField userNameField = new JTextField(3);
+    flowLayoutForCell.add(userNameField);
     connectionPanel.add(flowLayoutForCell);
     flowLayoutForCell = new JPanel(cellFlowLayout);
     flowLayoutForCell.add(new JLabel("Passwort:"));
     connectionPanel.add(flowLayoutForCell);
     flowLayoutForCell = new JPanel(cellFlowLayout);
-    flowLayoutForCell.add(new JPasswordField(5));
+    JPasswordField userPasswordField = new JPasswordField(3);
+    flowLayoutForCell.add(userPasswordField);
     connectionPanel.add(flowLayoutForCell);
     flowLayoutForCell = new JPanel(cellFlowLayout);
     flowLayoutForCell.add(new JLabel("Art:"));
@@ -123,6 +150,37 @@ public class Logon extends JFrame implements ItemListener {
     JButton printButton = new JButton("Ausgabe");
     printButton.setName("PRINT_BUTTON");
 
+    ActionListener buttonListener = new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("Parameter String: " + e.paramString());
+        System.out.println("Action Command: " + e.getActionCommand());
+        System.out.println("Modifiers: " + e.getModifiers());
+        System.out.println("Timestamp: " + e.getWhen());
+
+
+        if(e.getActionCommand().equals("Beenden")) {
+          System.exit(0);
+        }else if(e.getActionCommand().equals("Ok")) {
+          // Login Routine
+          String userName = userNameField.getText();
+          String passWord = userPasswordField.getText();
+
+          String messageText = "";
+          if(passWord.equals(USER_LIST.get(userName))) {
+            messageText = "Erfolgreich eingeloggt! :>";
+          } else {
+            messageText = "Login fehlgeschlagen! :<";
+          }
+          messageTextLabel.setText(messageText);
+        }
+
+      }
+    };
+
+    cancelButton.addActionListener(buttonListener);
+    printButton.addActionListener(buttonListener);
+    okButton.addActionListener(buttonListener);
+
     southPanel.add(okButton);
     southPanel.add(cancelButton);
     southPanel.add(printButton);
@@ -141,6 +199,7 @@ public class Logon extends JFrame implements ItemListener {
     centerPanel.add(connectionPanel);
     centerPanel.add(filePanel);
 
+    mainPanel.add(northPanel, BorderLayout.NORTH);
     mainPanel.add(centerPanel, BorderLayout.CENTER);
     mainPanel.add(southPanel, BorderLayout.SOUTH);
 
@@ -171,22 +230,4 @@ public class Logon extends JFrame implements ItemListener {
     GraphicsDevice[] screens = virtualGraphicsEvironment.getScreenDevices();
   }
 
-  @Override
-  public void itemStateChanged(ItemEvent e) {
-    System.out.println("itemStateChanged");
-    System.out.println("Aktuelles Item: " + e.getItem());
-    System.out.println("Änderungszustand: " + e.getStateChange());
-    System.out.println("Parameter String: " + e.paramString());
-
-
-    if(e.getStateChange() == ItemEvent.SELECTED) {
-      switch(e.getItem().toString()){
-        case "FTP":
-          portField.setText("21");
-          break;
-        case "SSH":
-          portField.setText("22");
-      }
-    }
-  }
 }
