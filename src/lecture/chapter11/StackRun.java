@@ -1,0 +1,23 @@
+package lecture.chapter11;
+
+public class StackRun {
+  public static void main(String[] args) {
+
+    Stack<String> wordStack = new Stack<>();
+
+    wordStack.push("!");
+    wordStack.push("NICHT");
+    wordStack.push("...");
+    wordStack.push("Feierabend");
+    wordStack.push("machen");
+    wordStack.push("Wir");
+
+    while(!wordStack.isEmpty()){
+      System.out.print(wordStack.pop() + " ");
+    }
+
+    System.out.println();
+    System.out.println("Danke!");
+
+  }
+}
