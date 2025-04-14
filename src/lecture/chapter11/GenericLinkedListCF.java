@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-
+/*
 public class GenericLinkedListCF<T> implements List<T> {
 
   private Node firstNode;
@@ -54,7 +54,7 @@ public class GenericLinkedListCF<T> implements List<T> {
 
     return size;
   }
-   */
+
 
   // Size() --> O(1)
   public int size(){
@@ -242,3 +242,5 @@ public class GenericLinkedListCF<T> implements List<T> {
   }
 
 }
+*/
+
