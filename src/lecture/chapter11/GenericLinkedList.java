@@ -38,6 +38,25 @@ public class GenericLinkedList<T> {
     System.out.println();
   }
 
+  public void printListRecursive(){
+    if(firstNode == null){
+      System.out.println("List is empty");
+      return;
+    }
+
+    printListRecursive(firstNode);
+    System.out.println();
+  }
+
+  private void printListRecursive(Node currentNode){
+    System.out.print(currentNode.getData() + " ");
+    if(currentNode.getNextNode() != null){
+      printListRecursive(currentNode.getNextNode());
+    }
+  }
+
+
+
   /* --> O(n)
   public int size(){
     int size = 0;

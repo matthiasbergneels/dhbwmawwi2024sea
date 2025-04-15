@@ -10,6 +10,9 @@ public class GenericLinkedListRun {
     genericLinkedList.add("Sterne");
 
     genericLinkedList.printList();
+    genericLinkedList.printListRecursive();
+
+
 
   }
 }
