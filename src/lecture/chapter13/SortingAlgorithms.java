@@ -1,8 +1,6 @@
 package lecture.chapter13;
 public class SortingAlgorithms {
 
-  static long quickSortSwapCount = 0;
-
   public static void main(String[] args) {
 
     int[] toSort = {50, 70, 100, 80, 40, 30, 20, 10 ,60};
@@ -15,8 +13,16 @@ public class SortingAlgorithms {
     int[] sorted = bubbleSort(toSort.clone());
     printArray(sorted);
 
-    System.out.println("Bubble Sort V3 sortiert: ");
+    System.out.println("Bubble Sort V2 sortiert: ");
     sorted = bubbleSortV2(toSort.clone());
+    printArray(sorted);
+
+    System.out.println("Bubble Sort V3 sortiert: ");
+    sorted = bubbleSortV3(toSort.clone());
+    printArray(sorted);
+
+    System.out.println("SelectionSort sortiert: ");
+    sorted = selectionSort(toSort.clone());
     printArray(sorted);
 
   }
@@ -43,6 +49,45 @@ public class SortingAlgorithms {
           swap(numbers, j, j+1);
         }
       }
+    }
+
+    return numbers;
+  }
+
+  public static int[] bubbleSortV3(int[] numbers){
+    boolean swapped = true;
+    int sortedArea = 1;
+
+    while(swapped){
+      swapped = false;
+      for(int j = 0; j < numbers.length-sortedArea; j++){
+        if(numbers[j] > numbers[j+1]){
+          swap(numbers, j, j+1);
+          swapped = true;
+        }
+      }
+      sortedArea++;
+    }
+
+    return numbers;
+  }
+
+  public static int[] selectionSort(int[] numbers){
+
+    int sortedMarker = numbers.length-1;
+
+    while(sortedMarker > 0){
+      int maxPos = 0;
+      for(int i = 1; i <= sortedMarker; i++){
+        if(numbers[i] > numbers[maxPos]){
+          maxPos = i;
+        }
+      }
+
+      if(maxPos != sortedMarker) {
+        swap(numbers, maxPos, sortedMarker);
+      }
+      sortedMarker--;
     }
 
     return numbers;
