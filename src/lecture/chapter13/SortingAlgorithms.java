@@ -15,11 +15,35 @@ public class SortingAlgorithms {
     int[] sorted = bubbleSort(toSort.clone());
     printArray(sorted);
 
+    System.out.println("Bubble Sort V3 sortiert: ");
+    sorted = bubbleSortV2(toSort.clone());
+    printArray(sorted);
+
   }
 
 
   public static int[] bubbleSort(int[] numbers){
 
+    for(int i = 0; i < numbers.length; i++){
+      for(int j = 0; j < numbers.length-1; j++){
+        if(numbers[j] > numbers[j+1]){
+          swap(numbers, j, j+1);
+        }
+      }
+    }
+
+    return numbers;
+  }
+
+  public static int[] bubbleSortV2(int[] numbers){
+
+    for(int i = 0; i < numbers.length; i++){
+      for(int j = 0; j < numbers.length-1-i; j++){
+        if(numbers[j] > numbers[j+1]){
+          swap(numbers, j, j+1);
+        }
+      }
+    }
 
     return numbers;
   }
