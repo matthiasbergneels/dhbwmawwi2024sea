@@ -15,6 +15,16 @@ public class BinarySearchTreeRun {
     orderedWords.add("Mittendrin");
     orderedWords.add("Frühstück");
 
+
+    System.out.println("In-Order-Ausgabe:");
+    orderedWords.printInOrder();
+
+    System.out.println("Pre-Order-Ausgabe:");
+    orderedWords.printPreOrder();
+
+    System.out.println("Post-Order-Ausgabe:");
+    orderedWords.printPostOrder();
+
     System.out.println("ENDE");
 
 

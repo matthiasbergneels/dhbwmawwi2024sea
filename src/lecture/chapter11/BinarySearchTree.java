@@ -38,9 +38,74 @@ public class BinarySearchTree<T extends Comparable<T>> {
     return size;
   }
 
-  // in-order-Traversierung --> left - current - right
+  // in-order-Traversierung (Aufsteigend) --> left - current - right
+
+  public void printInOrder() {
+    if(root != null) {
+      printInOrder(root);
+    }else{
+      System.out.println("Der Baum ist leer");
+    }
+  }
+
+  private void printInOrder(Node currentNode) {
+    if(currentNode.getLeftNode() != null){
+      printInOrder(currentNode.getLeftNode());
+    }
+
+    System.out.println(currentNode.getData());
+
+    if(currentNode.getRightNode() != null){
+      printInOrder(currentNode.getRightNode());
+    }
+  }
+
+  // in-order-Traversierung (Absteigend) --> right - current - left
+
+
   // pre-order-Traversierung --> current-left-right
+  public void printPreOrder() {
+    if(root != null) {
+      printPreOrder(root);
+    }else {
+      System.out.println("Der Baum ist leer");
+    }
+  }
+
+  private void printPreOrder(Node currentNode) {
+    System.out.println(currentNode.getData());
+
+    if(currentNode.getLeftNode() != null){
+      printInOrder(currentNode.getLeftNode());
+    }
+
+    if(currentNode.getRightNode() != null){
+      printInOrder(currentNode.getRightNode());
+    }
+  }
+
+
   // post-order-Traversierung --> left-right-current
+  public void printPostOrder() {
+    if(root != null) {
+      printPostOrder(root);
+    }else {
+      System.out.println("Der Baum ist leer");
+    }
+  }
+
+  private void printPostOrder(Node currentNode) {
+
+    if(currentNode.getLeftNode() != null){
+      printPostOrder(currentNode.getLeftNode());
+    }
+
+    if(currentNode.getRightNode() != null){
+      printPostOrder(currentNode.getRightNode());
+    }
+
+    System.out.println(currentNode.getData());
+  }
 
   private class Node{
 
@@ -72,7 +137,5 @@ public class BinarySearchTree<T extends Comparable<T>> {
     T getData() {
       return data;
     }
-
   }
-
 }
