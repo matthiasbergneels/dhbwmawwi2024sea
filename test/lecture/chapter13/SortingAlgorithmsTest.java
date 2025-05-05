@@ -2,6 +2,8 @@ package lecture.chapter13;
 
 import org.junit.jupiter.api.*;
 
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SortingAlgorithmsTest {
@@ -38,15 +40,15 @@ class SortingAlgorithmsTest {
 
     @Test
     void selectionSort() {
-      int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
-      assertTrue(isSorted(bubbleSortedArray));
+      int[] selectionSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
+      assertTrue(isSorted(selectionSortedArray));
     }
 
 
     @Test
     void quickSort() {
-      int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
-      assertTrue(isSorted(bubbleSortedArray));
+      int[] quickSortedArray = SortingAlgorithms.quickSort(toSort.clone());
+      assertTrue(isSorted(quickSortedArray));
     }
 
   }
@@ -130,6 +132,26 @@ class SortingAlgorithmsTest {
     }
   }
 
+  @Nested
+  @DisplayName("Runtime Tests")
+  class RuntimeTestCases{
+
+    @BeforeAll
+    static void setUp() {
+      generateArray();
+    }
+
+    @Test
+    void quickSortRuntime() {
+
+      int[] toSortLocal = toSort.clone();
+
+      Assertions.assertTimeout(Duration.ofMillis(10), () -> {
+        SortingAlgorithms.quickSort(toSortLocal);
+      });
+
+    }
+  }
 
   // Helper Methods
   private static void generateOrderedArray() {
@@ -154,7 +176,6 @@ class SortingAlgorithmsTest {
     }
     return true;
   }
-
 
   private static void generateArray(){
     toSort = new int[count];
