@@ -82,14 +82,14 @@ class SortingAlgorithmsTest {
 
     @Test
     void selectionSort() {
-      int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
-      assertTrue(isSorted(bubbleSortedArray));
+      int[] selectionSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
+      assertTrue(isSorted(selectionSortedArray));
     }
 
     @Test
     void quickSort() {
-      int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
-      assertTrue(isSorted(bubbleSortedArray));
+      int[] quickSortedArray = SortingAlgorithms.quickSort(toSort.clone());
+      assertTrue(isSorted(quickSortedArray));
     }
   }
 
@@ -121,14 +121,14 @@ class SortingAlgorithmsTest {
 
     @Test
     void selectionSort() {
-      int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
-      assertTrue(isSorted(bubbleSortedArray));
+      int[] selectionSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
+      assertTrue(isSorted(selectionSortedArray));
     }
 
     @Test
     void quickSort() {
-      int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
-      assertTrue(isSorted(bubbleSortedArray));
+      int[] quickSortedArray = SortingAlgorithms.quickSort(toSort.clone());
+      assertTrue(isSorted(quickSortedArray));
     }
   }
 
@@ -146,7 +146,7 @@ class SortingAlgorithmsTest {
 
       int[] toSortLocal = toSort.clone();
 
-      Assertions.assertTimeout(Duration.ofMillis(10), () -> {
+      Assertions.assertTimeout(Duration.ofMillis(8), () -> {
         SortingAlgorithms.quickSort(toSortLocal);
       });
 
