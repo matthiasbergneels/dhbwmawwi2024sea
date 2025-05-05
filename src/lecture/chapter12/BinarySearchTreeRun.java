@@ -1,4 +1,4 @@
-package lecture.chapter11;
+package lecture.chapter12;
 
 public class BinarySearchTreeRun {
 
